@@ -1,10 +1,16 @@
 # state_machine_rive
 
-A new Flutter project.
+A new Flutter project for Rive StateMachine.
 
-## Getting Started
+# on Rive
 
-This project is a starting point for a Flutter application.
+![s](assets/images/design.png)
+
+![s](assets/images/animation.png)
+
+----
+
+This project is a starting point for a Flutter Rive state application.
 
 A few resources to get you started if this is your first Flutter project:
 
