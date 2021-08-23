@@ -4,9 +4,13 @@ A new Flutter project for Rive StateMachine.
 
 # on Rive
 
-![s](assets/images/design.png)
+![design](assets/images/design.png)
 
-![s](assets/images/animation.png)
+![animation](assets/images/animation.png)
+
+### Result
+
+![result](assets/images/result.gif)
 
 ----
 
