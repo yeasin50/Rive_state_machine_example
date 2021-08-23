@@ -6,6 +6,10 @@ A new Flutter project for Rive StateMachine.
 
 ![design](assets/images/design.png)
 
+![low](assets/images/low.png)
+
+![high](assets/images/high.png)
+
 ![animation](assets/images/animation.png)
 
 ### Result
