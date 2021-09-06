@@ -2,7 +2,15 @@
 
 A new Flutter project for Rive StateMachine.
 
-# on Rive
+## Login From State-Machine
+
+![image](assets/images/login_screen_animations.png)
+
+---
+
+## Sample Ik constraints
+
+### On Rive
 
 ![design](assets/images/design.png)
 
@@ -16,8 +24,7 @@ A new Flutter project for Rive StateMachine.
 
 ![result](assets/images/result.gif)
 
-----
-
+---
 This project is a starting point for a Flutter Rive state application.
 
 A few resources to get you started if this is your first Flutter project:
