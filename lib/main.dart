@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'screens/home.screen.dart';
 import 'screens/loginFrom.screen.dart';
-import 'screens/rive_with_text.screens.dart';
+import 'screens/Login/rive_with_text.screens.dart';
 
 void main() {
   runApp(MyApp());
