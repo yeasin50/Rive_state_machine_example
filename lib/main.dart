@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screens/home.screen.dart';
-import 'screens/loginFrom.screen.dart';
-import 'screens/Login/rive_with_text.screens.dart';
+import 'views/Login/login.view.dart';
 
 void main() {
   runApp(MyApp());
