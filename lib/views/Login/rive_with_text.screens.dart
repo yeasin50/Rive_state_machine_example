@@ -86,6 +86,7 @@ class _TextFieldWithRiveState extends State<TextFieldWithRive> {
               SizedBox(
                 width: constraints.maxWidth * .8,
                 child: TextField(
+                  scrollPhysics: BouncingScrollPhysics(),
                   controller: textEditingController,
                   decoration: InputDecoration(hintText: "keep typing"),
                 ),
