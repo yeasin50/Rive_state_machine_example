@@ -33,49 +33,55 @@ class _LogInScreenState extends State<LogInScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
-        body: Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: 1100,
-            ),
-            child: LayoutBuilder(
-              builder: (context, constraints) => Column(
-                children: [
-                  SizedBox(
-                    key: UniqueKey(),
-                    height: constraints.maxWidth * .4,
-                    child: SmileRive(),
-                  ),
-                  FocusScope(
-                    onFocusChange: (value) {
-                      // EmojiAnimationController.instance.isIdleAnimRunning;
-                      EmojiAnimationController.instance.idleAnimation(!value);
-                    },
-                    child: CustomTextFiled(
-                      controller: controllerEmail,
-                      obsecure: false,
-                      hintText: "Email",
-                      borderWidth: 4,
-                      size: Size(constraints.maxWidth * .5, kToolbarHeight),
+        body: GestureDetector(
+          onTap: () {
+            ///kinda frameSkip
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 1100,
+              ),
+              child: LayoutBuilder(
+                builder: (context, constraints) => Column(
+                  children: [
+                    SizedBox(
+                      key: UniqueKey(),
+                      height: constraints.maxWidth * .4,
+                      child: SmileRive(),
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  FocusScope(
-                    onFocusChange: (value) {
-                      EmojiAnimationController.instance.hatDown(value);
-                    },
-                    child: CustomTextFiled(
-                      controller: controllerPassword,
-                      obsecure: true,
-                      hintText: "Password",
-                      borderWidth: 4,
-                      size: Size(constraints.maxWidth * .5, kToolbarHeight),
+                    FocusScope(
+                      onFocusChange: (value) {
+                        // EmojiAnimationController.instance.isIdleAnimRunning;
+                        EmojiAnimationController.instance.idleAnimation(!value);
+                      },
+                      child: CustomTextFiled(
+                        controller: controllerEmail,
+                        obsecure: false,
+                        hintText: "Email",
+                        borderWidth: 4,
+                        size: Size(constraints.maxWidth * .5, kToolbarHeight),
+                      ),
                     ),
-                  ),
-                  LoginButton(
-                    onTap: () {},
-                  ),
-                ],
+                    SizedBox(height: 16),
+                    FocusScope(
+                      onFocusChange: (value) {
+                        EmojiAnimationController.instance.hatDown(value);
+                      },
+                      child: CustomTextFiled(
+                        controller: controllerPassword,
+                        obsecure: true,
+                        hintText: "Password",
+                        borderWidth: 4,
+                        size: Size(constraints.maxWidth * .5, kToolbarHeight),
+                      ),
+                    ),
+                    LoginButton(
+                      onTap: () {},
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
