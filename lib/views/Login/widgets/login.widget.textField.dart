@@ -39,6 +39,7 @@ class CustomTextFiled extends StatelessWidget {
           style: TextStyle(
             color: Colors.white,
           ),
+          obscureText: obsecure,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(
