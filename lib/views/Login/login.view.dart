@@ -45,6 +45,7 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
               child: LayoutBuilder(
                 builder: (context, constraints) => Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
                       key: UniqueKey(),
