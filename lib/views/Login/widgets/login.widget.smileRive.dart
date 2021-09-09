@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
-
 import 'package:state_machine_rive/views/Login/controllers/loginScreen.controller.emojiAnimation.dart';
 
 class SmileRive extends StatefulWidget {
@@ -10,10 +9,10 @@ class SmileRive extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SmileRiveState createState() => _SmileRiveState();
+  SmileRiveState createState() => SmileRiveState();
 }
 
-class _SmileRiveState extends State<SmileRive> {
+class SmileRiveState extends State<SmileRive> {
   StateMachineController? animationState;
 
   SMIInput<double>? valueController;
@@ -40,13 +39,33 @@ class _SmileRiveState extends State<SmileRive> {
           StateMachineController.fromArtboard(artboard, "anim_controller");
 
       if (animationState != null) {
-        EmojiAnimationController(animationState);
+        setState(() {
+          /// * Make sure on provider
+          artboard.addController(animationState!);
+          EmojiAnimationController.instance.initInputs(animationState!);
+        });
       }
 
       setState(() {
         _riveArtboard = artboard;
       });
     });
+  }
+
+  initInputs(controller) {
+    valueController = controller.findInput('value');
+
+    blinkAnim = controller.findInput<bool>("blink") as SMITrigger;
+
+    focusOnTextAnim = controller.findInput<bool>("focusOnText") as SMITrigger;
+
+    unFocusFromText = controller.findInput<bool>("unFocusText") as SMITrigger;
+
+    hatDownAnim = controller.findInput<bool>("hatDown") as SMITrigger;
+    hatUpAnim = controller.findInput<bool>("hatUp") as SMITrigger;
+
+    idleAnim = controller.findInput<bool>('idle') as SMIBool;
+    idleAnim!.value = true;
   }
 
   @override
@@ -62,32 +81,5 @@ class _SmileRiveState extends State<SmileRive> {
         : Rive(
             artboard: _riveArtboard!,
           );
-
-    // FocusScope(
-    //   onFocusChange: (value) {
-    //     setState(() {
-    //       idleAnim!.value = !value;
-    //     });
-    //   },
-    //   child: TextField(
-    //     scrollPhysics: BouncingScrollPhysics(),
-    //     controller: w,
-    //     decoration: InputDecoration(hintText: "Email"),
-    //   ),
-    // ),
-    // FocusScope(
-    //   onFocusChange: (value) {
-    //     print("focus2 $value");
-    //     if (value)
-    //       hatDownAnim!.fire();
-    //     else
-    //       hatUpAnim!.fire();
-    //   },
-    //   child: TextField(
-    //     scrollPhysics: BouncingScrollPhysics(),
-    //     obscureText: true,
-    //     decoration: InputDecoration(hintText: "Password"),
-    //   ),
-    // ),
   }
 }

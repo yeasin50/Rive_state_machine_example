@@ -35,6 +35,7 @@ class CustomTextFiled extends StatelessWidget {
         width: size.width,
         height: size.height,
         child: TextField(
+          controller: controller,
           style: TextStyle(
             color: Colors.white,
           ),
