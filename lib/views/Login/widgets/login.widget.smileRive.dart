@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:state_machine_rive/views/Login/controllers/loginScreen.controller.emojiAnimation.dart';
 
@@ -30,7 +31,10 @@ class _SmileRiveState extends State<SmileRive> {
   @override
   void initState() {
     super.initState();
+    _loadAnim();
+  }
 
+  _loadAnim() async {
     rootBundle.load("rives/smile_face.riv").then((value) async {
       RiveFile file = RiveFile.import(value);
 
@@ -40,9 +44,10 @@ class _SmileRiveState extends State<SmileRive> {
           StateMachineController.fromArtboard(artboard, "anim_controller");
 
       if (animationState != null) {
-        EmojiAnimationController(animationState);
+        context
+            .read(animControllNotifier)
+            .initInputs(controller: animationState!);
       }
-
       setState(() {
         _riveArtboard = artboard;
       });
@@ -57,11 +62,14 @@ class _SmileRiveState extends State<SmileRive> {
 
   @override
   Widget build(BuildContext context) {
-    return _riveArtboard == null
-        ? Text("Unalble to find rive")
-        : Rive(
-            artboard: _riveArtboard!,
-          );
+    return Consumer(builder: (context, watch, child) {
+      watch(animControllNotifier);
+      return _riveArtboard == null
+          ? Text("Unalble to find rive")
+          : Rive(
+              artboard: _riveArtboard!,
+            );
+    });
 
     // FocusScope(
     //   onFocusChange: (value) {
