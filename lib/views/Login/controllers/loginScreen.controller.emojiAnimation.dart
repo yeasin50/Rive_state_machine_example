@@ -8,9 +8,16 @@ import 'package:rive/rive.dart';
   unFocusText,
   blink
 */
-
+/// we dont need any provider because Rive controll it's state by itself :)
 class EmojiAnimationController {
-  final StateMachineController? controller;
+  static EmojiAnimationController? _instance;
+
+  EmojiAnimationController._();
+
+  static EmojiAnimationController get instance =>
+      _instance ??= EmojiAnimationController._();
+
+  StateMachineController? _controller;
   //* controller  inputs
   SMITrigger? _blinkAnim;
   SMITrigger? _focusOnTextAnim;
@@ -19,53 +26,56 @@ class EmojiAnimationController {
   SMITrigger? _hatUpAnim;
   SMIBool? _idleAnim;
 
+  get isIdleAnimRunning => _idleAnim!.value;
+
   SMIInput<double>? _valueController;
 
-  EmojiAnimationController(this.controller) {
-    _locateInputs();
-  }
+  initInputs(StateMachineController controller) {
+    this._controller = controller;
 
-  _locateInputs() {
-    _valueController = controller!.findInput('value');
+    this._valueController = controller.findInput('value');
 
-    _blinkAnim = controller!.findInput<bool>("blink") as SMITrigger;
+    this._blinkAnim = controller.findInput<bool>("blink") as SMITrigger;
 
-    _focusOnTextAnim = controller!.findInput<bool>("focusOnText") as SMITrigger;
+    this._focusOnTextAnim =
+        controller.findInput<bool>("focusOnText") as SMITrigger;
 
-    _unFocusFromText = controller!.findInput<bool>("unFocusText") as SMITrigger;
+    this._unFocusFromText =
+        controller.findInput<bool>("unFocusText") as SMITrigger;
 
-    _hatDownAnim = controller!.findInput<bool>("hatDown") as SMITrigger;
-    _hatUpAnim = controller!.findInput<bool>("hatUp") as SMITrigger;
+    this._hatDownAnim = controller.findInput<bool>("hatDown") as SMITrigger;
+    this._hatUpAnim = controller.findInput<bool>("hatUp") as SMITrigger;
 
-    _idleAnim = controller!.findInput<bool>('idle') as SMIBool;
-    _idleAnim!.value = true;
+    this._idleAnim = controller.findInput<bool>('idle') as SMIBool;
+    this._idleAnim!.value = true;
   }
 
   /// * Eyes movement 0-100
   followText(double value) {
-    _valueController!.value = value;
+    print(this._valueController == null);
+    this._valueController!.value = value;
   }
 
   idleAnimation(bool value) {
-    _idleAnim!.value = value;
+    this._idleAnim!.value = value;
   }
 
   textFieldFocus(bool focus) {
     if (focus)
-      _focusOnTextAnim!.fire();
+      this._focusOnTextAnim!.fire();
     else
-      _unFocusFromText!.fire();
+      this._unFocusFromText!.fire();
   }
 
   hatDown(bool value) {
     if (value)
-      _hatDownAnim!.fire();
+      this._hatDownAnim!.fire();
     else
-      _hatUpAnim!.fire();
+      this._hatUpAnim!.fire();
   }
 
   ///TODO:  add Timer
-  blinkEye(int? interval) async {
-    _blinkAnim!.fire();
+  blinkEye() async {
+    this._blinkAnim!.fire();
   }
 }
