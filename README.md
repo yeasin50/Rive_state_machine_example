@@ -4,6 +4,8 @@ A new Flutter project for Rive StateMachine.
 
 ## Login From State-Machine
 
+[Navigate to design on rive.app](https://rive.app/community/889-1742-loginfromemoji)
+
 ![image](assets/images/login_screen_animations.png)
 
 ---
