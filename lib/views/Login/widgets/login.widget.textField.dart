@@ -29,7 +29,7 @@ class CustomTextFiled extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(12),
         ),
         width: size.width,
@@ -37,13 +37,13 @@ class CustomTextFiled extends StatelessWidget {
         child: TextField(
           controller: controller,
           style: TextStyle(
-            color: Colors.white,
-          ),
+              // color: Colors.white,
+              ),
           obscureText: obsecure,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(
-              color: Colors.white60,
+              color: Colors.black54,
             ),
             border: InputBorder.none,
             fillColor: Colors.transparent,
