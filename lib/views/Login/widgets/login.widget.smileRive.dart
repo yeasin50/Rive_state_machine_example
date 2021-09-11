@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
+
 import 'package:state_machine_rive/views/Login/controllers/loginScreen.controller.emojiAnimation.dart';
 
 class SmileRive extends StatefulWidget {
+  final double height;
+
   const SmileRive({
     Key? key,
+    required this.height,
   }) : super(key: key);
 
   @override
@@ -78,8 +82,11 @@ class SmileRiveState extends State<SmileRive> {
   Widget build(BuildContext context) {
     return _riveArtboard == null
         ? Text("Unalble to find rive")
-        : Rive(
-            artboard: _riveArtboard!,
+        : SizedBox(
+            height: widget.height,
+            child: Rive(
+              artboard: _riveArtboard!,
+            ),
           );
   }
 }

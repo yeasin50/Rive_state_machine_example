@@ -4,19 +4,21 @@ import 'package:state_machine_rive/components/components.RectNeonFrame.dart';
 import 'package:state_machine_rive/components/components.colorSets.dart';
 
 class CustomTextFiled extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String hintText;
   final bool obsecure;
   final Size size;
   final double borderWidth;
+  final Function? onChanged;
 
   const CustomTextFiled({
     Key? key,
-    required this.controller,
+    this.controller,
     required this.hintText,
     required this.obsecure,
     required this.size,
     this.borderWidth = 4.0,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -35,7 +37,9 @@ class CustomTextFiled extends StatelessWidget {
         width: size.width,
         height: size.height,
         child: TextField(
-          controller: controller,
+          // what could be shortWay
+          onChanged: (v) => onChanged != null ? onChanged!(v) : null,
+          controller: controller ?? null,
           style: TextStyle(
               // color: Colors.white,
               ),

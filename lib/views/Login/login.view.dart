@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import 'controllers/loginScreen.controller.emojiAnimation.dart';
@@ -13,19 +15,9 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  late final TextEditingController controllerEmail;
-  late final TextEditingController controllerPassword;
-
   @override
   void initState() {
     super.initState();
-    controllerEmail = TextEditingController()
-      ..addListener(() {
-        /// `controllerEmail.text.length * 1.0` => `1.0` depend on textFieldWidth
-        EmojiAnimationController.instance
-            .followText(controllerEmail.text.length * 1.0);
-      });
-    controllerPassword = TextEditingController();
   }
 
   @override
@@ -42,47 +34,56 @@ class _LogInScreenState extends State<LogInScreen> {
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 maxWidth: 1100,
+                maxHeight: 1100,
               ),
               child: LayoutBuilder(
-                builder: (context, constraints) => Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      key: UniqueKey(),
-                      height: constraints.maxWidth * .4,
-                      child: SmileRive(),
-                    ),
-                    FocusScope(
-                      onFocusChange: (value) {
-                        // EmojiAnimationController.instance.isIdleAnimRunning;
-                        EmojiAnimationController.instance.idleAnimation(!value);
-                      },
-                      child: CustomTextFiled(
-                        controller: controllerEmail,
-                        obsecure: false,
-                        hintText: "Email",
-                        borderWidth: 4,
-                        size: Size(constraints.maxWidth * .5, kToolbarHeight),
+                builder: (context, constraints) {
+                  double riveHeight =
+                      math.min(constraints.maxWidth, constraints.maxHeight) *
+                          .5;
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SmileRive(
+                        height: riveHeight,
                       ),
-                    ),
-                    SizedBox(height: 16),
-                    FocusScope(
-                      onFocusChange: (value) {
-                        EmojiAnimationController.instance.hatDown(value);
-                      },
-                      child: CustomTextFiled(
-                        controller: controllerPassword,
-                        obsecure: true,
-                        hintText: "Password",
-                        borderWidth: 4,
-                        size: Size(constraints.maxWidth * .5, kToolbarHeight),
+                      FocusScope(
+                        onFocusChange: (value) {
+                          // EmojiAnimationController.instance.isIdleAnimRunning;
+                          EmojiAnimationController.instance
+                              .idleAnimation(!value);
+                        },
+                        child: CustomTextFiled(
+                          obsecure: false,
+                          hintText: "Email",
+                          borderWidth: 4,
+                          size: Size(constraints.maxWidth * .5, kToolbarHeight),
+                          onChanged: (v) {
+                            /// `controllerEmail.text.length * 1.0` => `1.0` depend on textFieldWidth
+                            print(constraints.maxWidth);
+                            EmojiAnimationController.instance.followText(
+                                v.length * (1100 / constraints.maxWidth));
+                          },
+                        ),
                       ),
-                    ),
-                    LoginButton(
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+                      SizedBox(height: 16),
+                      FocusScope(
+                        onFocusChange: (value) {
+                          EmojiAnimationController.instance.hatDown(value);
+                        },
+                        child: CustomTextFiled(
+                          obsecure: true,
+                          hintText: "Password",
+                          borderWidth: 4,
+                          size: Size(constraints.maxWidth * .5, kToolbarHeight),
+                        ),
+                      ),
+                      LoginButton(
+                        onTap: () {},
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ),
